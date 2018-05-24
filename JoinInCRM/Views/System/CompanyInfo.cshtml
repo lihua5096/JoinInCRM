@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "公司信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="weui-panel__bd" id="listbox">
+    
+    <div class="weui-cells__title" style="color:brown;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@ViewBag.CompanyName </div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>所在部</p>
+            </div>
+            <div class="weui-cell__ft" id='show-dept' style="font-size:small">@ViewBag.StoreName</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>职位</p>
+            </div>
+            <div class="weui-cell__ft" id='show-role' style="font-size:small">@ViewBag.RoleName</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>工号</p>
+            </div>
+            <div class="weui-cell__ft" id='show-empno' style="font-size:small">@ViewBag.EmpNo</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>姓名</p>
+            </div>
+            <div class="weui-cell__ft" id='show-empname' style="font-size:small">@ViewBag.EmpName</div>
+           
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>上级领导</p>
+            </div>
+            <div class="weui-cell__ft" id='show-leader' style="font-size:small"></div>
+
+        </a>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var showleader = document.getElementById("show-leader");
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url:"@Url.RouteUrl("DefaultApi",new { httproute = "GetUserLeader", controller = "BasicData", action = "GetUserLeader" })",
+            data: "UserID=@ViewBag.UserID",
+            cache:false,
+            success: function (data) {
+                
+                showleader.innerHTML = data;
+            },
+            error: function () {
+                showleader.innerHTML = "未知";
+            }
+            })
+    });
+
+</script>
+

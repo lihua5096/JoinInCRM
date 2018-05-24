@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "提醒";
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <title>JoinIn CRM,Join In Success!</title>
+    <meta name="keywords" content="广告关键词" />
+    <meta name="description" content="广告关键描述" />
+
+    <link href="~/Content/WeUI/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/WeUI/css/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/fonts/iconfont.css" rel="stylesheet" />
+
+
+
+    <script src="~/Content/WeUI/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/WeUI/js/jquery-weui.js"></script>
+    <script src="~/Content/WeUI/js/swiper.js"></script>
+
+
+    @*苹果专用*@
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="JoinInCRM">
+    <link rel="apple-touch-icon" href="~/Content/WeUI/images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/WeUI/images/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/WeUI/images/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/WeUI/images/touch-icon-ipad-retina.png">
+
+
+</head>
+<body ontouchstart>
+    <!--头部导航 开始-->
+    <header class="bar bar-nav">
+        <h1 class="title">@ViewBag.Title</h1>
+        <a class="pull-left" onclick="javascript: { history.back(1)}"><i class="icon icon-back"></i></a>
+        <a class="pull-right"><i class="icon"><img style="margin-top:-0.6rem;height:2.2rem;width:2.2rem;border-radius:2.2rem" src="@ViewBag.headimgurl" /></i></a>
+    </header>
+    <!--头部导航 结束-->
+    <!--主体部分 开始-->
+    <div class="content">
+        <!--banner 开始-->
+ 
+        <!--banner 结束-->
+        @*<div class="weui-cells__title">&nbsp;</div>*@
+ 
+            <div class="weui-panel__bd" id="listbox">
+                <a href="/news/detail_4.html" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+
+                        <img class="weui-media-box__thumb" src="~/Content/WeUI/images/clock.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">预期提醒</h4>
+                        <p class="weui-media-box__desc">查看你的工作预期</p>
+                    </div>
+                </a>
+                <a href="/news/detail_11.html" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb" src="~/Content/WeUI/images/pie-chart.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">本日提醒完成统计</h4>
+                        <p class="weui-media-box__desc">今日已完成的提醒都在这</p>
+                    </div>
+                </a>
+                <a href="/news/detail_10.html" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb" src="~/Content/WeUI/images/icon_nav_article.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">提醒详情</h4>
+                        <p class="weui-media-box__desc">点击查看详细内容</p>
+                    </div>
+                </a>
+                <a href="/news/detail_9.html" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb" src="~/Content/WeUI/images/gift.png" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">生日提醒</h4>
+                        <p class="weui-media-box__desc">客户快生日了，来这看看吧</p>
+                    </div>
+                    
+                </a>
+            </div>
+     
+
+
+    </div>
+    <script type="text/javascript">
+            //banner
+            $(".swiper-container").swiper({
+                loop: true,
+                autoplay: 3000
+            });
+    </script>
+    <!--底部固定导航 开始-->
+    <div class="weui-tabbar">
+        <a href="@Url.Action("Index","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-home"></i> </div>
+            <p class="weui-tabbar__label">首 页</p>
+        </a>
+        <a href="@Url.Action("Remind","Home")" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon"> <i class="icon icon-renwuguanli"></i> </div>
+            <p class="weui-tabbar__label">提醒</p>
+        </a>
+        <a href="@Url.Action("Circle","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-process"></i> </div>
+            <p class="weui-tabbar__label">工作圈</p>
+        </a>
+        <a href="@Url.Action("WorkData","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-training"></i> </div>
+            <p class="weui-tabbar__label">数据</p>
+        </a>
+        <a href="@Url.Action("Setting","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-set"></i> </div>
+            <p class="weui-tabbar__label">设置</p>
+        </a>
+    </div>
+    <!--底部固定导航 结束-->
+</body>
+</html>

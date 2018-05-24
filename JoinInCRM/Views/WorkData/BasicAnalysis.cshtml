@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "基础数据";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            客户
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+            营业
+        </a>
+
+        <a class="weui-navbar__item" href="#tab3">
+            订单
+        </a>
+
+    </div>
+
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">顾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问:</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="InterestedCar">
+                        
+                        <option selected="selected">黄伟强</option>
+                        <option>陳健君</option>
+                        <option>卢晓华</option>
+                        <option>美美</option>
+                        <option>燃</option>
+                        <option>小马</option>
+                        <option>协联行</option>
+
+</select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="ActualDate" class="weui-label" style="color:blueviolet">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="date" id="AnalysDate" name="AnalysDate" value="@DateTime.Now.ToString("yyyy-MM-dd")">   
+                </div>
+            </div>
+ 
+
+            <div style="width:100%">
+                <table border="1" cellspacing="0" style="align-content:center; border-color:#cccaca; width:100%">
+                    <thead style="background:#cccaca">
+                        <tr>
+                            <th style="width:28%">指标</th>
+                            <th style="width:22%">本日</th>
+                            <th style="width:22%">本月</th>
+                            <th style="width:28%">完成率</th>
+                        </tr>
+                    </thead>
+                    <tbody style="vertical-align:middle;text-align:center">
+
+                        <tr>
+                            <td>留档</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>战败</td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>留存意向</td>
+                            <td>13</td>
+                            <td>5</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>结束</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>-</td>
+                        </tr>
+                         
+                         
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div id="container"></div>
+
+        </div>
+
+        <div id="tab2" class="weui-tab__bd-item">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '客户数据'
+            },
+            xAxis: {
+                categories: [
+                    '留档',
+                    '战败',
+                    '意向',
+                    '结束'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '客户数'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} 个</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: '本日',
+                data: [5, 0, 13, 0]
+            }, {
+                name: '本月',
+                data: [5, 10, 5, 0]
+            },]
+        });
+    });
+
+</script>
+

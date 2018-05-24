@@ -1,0 +1,342 @@
+﻿ @using JoinInCRM.Models;
+@{
+    Customer cust = (Customer)ViewBag.CustInfo;
+    if (ViewBag.editPermission == "YES")
+    {
+        ViewBag.Title = "客户编辑";
+    }
+    else
+    {
+        ViewBag.Title = "客户信息";
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var redirectUrl = Url.Action("Business", "Customer", new { id =cust.CustomerID, BusinessType = "Basic" });
+    var sourceCout = 0;
+}
+
+<form id="newcustomerForm" method="post">
+    <input type="text" id="CustomerID" value="@cust.CustomerID" hidden="hidden">
+    <div class="weui-tab" style="z-index:10">
+        <div class="weui-navbar"  style="z-index:10">
+            <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+                资料
+            </a>
+            <a class="weui-navbar__item" href="#tab2">
+                车辆
+            </a>
+            @*<a class="weui-navbar__item " href="#tab3">
+                营业
+            </a>*@
+            <a class="weui-navbar__item" href="#tab4">
+                补充
+            </a>
+        </div>
+
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item  weui-tab__bd-item--active ">
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">姓名：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='CustomerName' value="@cust.CustomerName" name='CustomerName' placeholder="请输入姓名">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">电话：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="Telphone" value="@cust.Telphone" name='Telphone' placeholder="请输入电话">
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="Source" class="weui-label">来源：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="Source" name="Source">
+                            @foreach (var item in ViewBag.SourceList)
+                            {
+                                if (cust.Source == item.SourceID)
+                                {
+                                    <option value="@item.SourceID" selected>@item.SourceName</option>
+                                }
+                                <option value="@item.SourceID">@item.SourceName</option>
+                           
+                            }
+             
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">级别：</label></div>
+                    <div class="weui-cell__bd">
+                        <div class="checkbutton">
+                            <section class="plan">
+                                @foreach (var item in ViewBag.GradeList)
+                                {
+                                    if (item.GradeID == cust.Grade)
+                                    {
+                                        <input type="radio" name="Grade" id="grade_@item.GradeID" checked value="@item.GradeID"><label class=" four" for="grade_@item.GradeID">@item.GradeName</label>
+                                    }
+                                    else
+                                    {
+                                        @*<input type="radio" name="Grade" id="grade_@item.GradeID" value="@item.GradeID"><label class=" four" for="grade_@item.GradeID">@item.GradeName</label>*@
+                                    }
+
+
+                                }
+
+                            </section>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="weui-cells__title">性别：</div>
+                <div class="weui-cells weui-cells_radio ">
+                    <label class="weui-cell weui-check__label" for="male">
+                        
+                        <div class="weui-cell__bd">
+                            <p>男</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            @if (cust.Sex.ToLower() == "true")
+                            {
+                                <input type="radio" class="weui-check" name="Sex" checked="checked" value="1" id="male">
+                            }
+                            else
+                            {
+                                <input type="radio" class="weui-check" name="Sex" value="1" id="male">
+                            }
+
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="female">
+                        <div class="weui-cell__bd">
+                            <p>女</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            @if (cust.Sex.ToLower() == "true")
+                            {
+                                <input type="radio" name="Sex" class="weui-check" value="0" id="female">
+                            }
+                            else
+                            {
+                                <input type="radio" name="Sex" class="weui-check" value="0" id="female"  checked="checked" >
+                            }
+                            
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+
+                </div>
+                <div class="weui-cells__title">备注：</div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" id="Remark" value="@cust.Remark" name='Remark' placeholder="" rows="3"></textarea>
+                            <div class="weui-textarea-counter"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="tab2" class="weui-tab__bd-item">
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">意向车型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="InterestedCar">
+                            <option value="-1">&nbsp;</option>
+                            @foreach (var item in ViewBag.CarList)
+                            {
+                                if (cust.InterestedCar == item.CarID)
+                                {
+                                    <option value="@item.CarID" selected="selected" >@item.CarName</option>
+                                }
+                                <option value="@item.CarID">@item.CarName</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">车辆颜色：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="InterestedColor">
+                            <option value="-1">&nbsp;</option>
+                            @foreach (var item in ViewBag.ColorList)
+                            {
+                                if (cust.InterestedColor == item.ColorID)
+                                {
+                                    <option value="@item.ColorID" selected="selected">@item.ColorName</option>
+                                }
+                                <option value="@item.ColorID">@item.ColorName</option>
+
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">竞&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='CompetingProduct' name='CompetingProduct' value="@cust.CompetingProduct" placeholder="可选择输入竞品">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">预&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;算：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='Budget' name='Budget' value="@cust.Budget" placeholder="可选择输入客户预算">
+                    </div>
+                </div>
+                <div class="weui-cells__title">有无车牌：</div>
+                <div class="weui-cells weui-cells_radio ">
+                    <label class="weui-cell weui-check__label" for="x11">
+                        <div class="weui-cell__bd">
+                            <p>有车牌</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            @if (cust.LicensePlate.ToLower()=="true")
+                            {
+                                <input type="radio" class="weui-check" name="LicensePlate" value="1" checked="checked" id="x11">
+                            }
+                            else
+                            {
+                                <input type="radio" class="weui-check" name="LicensePlate" value="1" id="x11">
+                            }
+                            
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="x12">
+                        <div class="weui-cell__bd">
+                            <p>没车牌</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            @if (cust.LicensePlate.ToLower() == "true")
+                            {
+                                <input type="radio" name="LicensePlate" class="weui-check" value="0" id="x12" >
+                            }
+                            else
+                            {
+                                <input type="radio" name="LicensePlate" class="weui-check" value="0" id="x12" checked="checked">
+                            }
+
+                            
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label for="home-city" class="weui-label">上牌地区：</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="home-city" name='CardArea' type="text" value="@cust.CardArea">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">备注：</div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" id="VehicleRemark" name='VehicleRemark' placeholder="可选择输入车辆的其它备注说明" value="@cust.VehicleRemark" rows="3"></textarea>
+                            <div class="weui-textarea-counter">不要超过50字</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            @*<div id="tab3" class="weui-tab__bd-item">
+
+            </div>*@
+            <div id="tab4" class="weui-tab__bd-item">
+                <h5>此页待开发，以后按需求扩展，增加要补充录入的内容。</h5>
+            </div>
+        </div>
+    </div>
+
+
+  
+        @if (ViewBag.editPermission == "YES")
+        {
+            <a class="weui-btn weui-btn_blue"  onclick="SaveCustomer()">保存</a>
+            <a class="weui-btn weui-btn_warn"  onclick="javascript:{ history.back(1)}">取消</a>
+        }
+
+  
+</form>
+
+<script src="~/Content/WeUI/js/fastclick.js"></script>
+<script src="~/Content/WeUI/js/city-picker.js"></script>
+
+<script type="text/javascript">
+        //banner
+        $(".swiper-container").swiper({
+            loop: true,
+            autoplay: 3000
+        });
+
+        $(function () {
+            FastClick.attach(document.body);
+            $("#home-city").cityPicker({
+                title: "请选择上牌地区",
+                showDistrict: false,
+            });
+        });
+        function SaveCustomer() {
+            var formParam = $("#newcustomerForm").serialize();
+            
+            formParam = formParam + "&CustomerID=" + document.getElementById("CustomerID").value;
+            $.showLoading("正在处理数据...");
+
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url:"@Url.Action("Edit", "Customer")",
+                data: formParam,
+                cache:false,
+                success: function (data) {
+
+                    //？？？？
+                    $.hideLoading();
+
+                    var strresult = data;
+                    if (strresult == "1") {
+ 
+                        $("input[name=CustomerName]").focus();
+                        $.toast("保存成功！", function () {
+                            console.log('close');
+                            var custID = document.getElementById("CustomerID").value;
+                            window.location = "@redirectUrl";
+                        });
+
+                    } else {
+                        $.toptip('操作失败', 'error');
+                    }
+
+                },
+                error: function (data) {
+                    $.hideLoading();
+                   // $.toast("保存失败"+data.responseText, "forbidden");
+                    $.toptip('操作失败：'+data.responseText, 'error')
+                }
+            });
+        }
+       
+        
+
+</script>

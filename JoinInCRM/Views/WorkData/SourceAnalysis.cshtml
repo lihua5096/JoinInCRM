@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "来源分析";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            新增来源分析
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+            订单来源分析
+        </a>
+ 
+    </div>
+
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+ 
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="InterestedCar">
+ 
+                        @for (int i = 0; i <= 1; i++)
+                        {
+                            int year = int.Parse(DateTime.Now.Year.ToString());
+                            year -= i;
+                            for (int j = 12; j >= 1; j--)
+                            {
+                                string month = j.ToString().PadLeft(2, '0');
+                                <option value="">@year-@month</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div> 
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="InterestedCar">
+                        <option value="-1" selected>全部</option>
+                        @foreach (var item in ViewBag.CarList)
+                        {
+                            <option value="@item.CarID">@item.CarName</option>
+                        }
+ 
+                    </select>
+                </div>
+            </div>
+ 
+            <div style="width:100%">
+                <table  border="1" cellspacing="0" style="align-content:center; border-color:#cccaca; width:100%">
+                    <thead style="background:#cccaca">
+                        <tr>
+                            <th style="width:33%">来源</th>
+                            <th style="width:33%">次数</th>
+                            <th style="width:33%">比率</th>                            
+                        </tr>
+                    </thead>
+                    <tbody style="vertical-align:middle;text-align:center" >
+ 
+                        <tr>
+                            <td>来电</td>
+                            <td>5</td>
+                            <td>50.00%</td>
+                        </tr>
+                        <tr>
+                            <td>来店</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>外拓</td>
+                            <td>1</td>
+                            <td>10.00%</td>
+                        </tr>
+                        <tr>
+                            <td>网络</td>
+                            <td>2</td>
+                            <td>20.00%</td>
+                        </tr>
+                        <tr>
+                            <td>车展</td>
+                            <td>2</td>
+                            <td>20.00%</td>
+                        </tr>
+                        <tr>
+                            <td>转介绍</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div id="container"  ></div>
+ 
+        </div>
+
+        <div id="tab2" class="weui-tab__bd-item">
+ 
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: '新增客户来源分析'
+            },
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '客户来源占比',
+                data: [
+                    ['来电', 50.0],
+                    ['来店', 0.0],      
+                    ['外拓', 10.0],
+                    ['网络', 20.0],
+                    ['车展', 20.0],
+                    ['转介绍', 0.0]
+                ]
+            }]
+        });
+    });
+</script>

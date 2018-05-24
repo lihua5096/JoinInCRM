@@ -1,0 +1,218 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "数据";
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <title>JoinIn CRM,Join In Success!</title>
+    <meta name="keywords" content="JoinIn CRM,CRM" />
+    <meta name="description" content="广告关键描述" />
+
+    <link href="~/Content/WeUI/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/WeUI/css/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/fonts/iconfont.css" rel="stylesheet" />
+
+
+
+    <script src="~/Content/WeUI/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/WeUI/js/jquery-weui.js"></script>
+    <script src="~/Content/WeUI/js/swiper.js"></script>
+
+
+    @*苹果专用*@
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="JoinInCRM">
+    <link rel="apple-touch-icon" href="~/Content/WeUI/images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/WeUI/images/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/WeUI/images/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/WeUI/images/touch-icon-ipad-retina.png">
+
+
+</head>
+<body ontouchstart>
+    <!--头部导航 开始-->
+    <header class="bar bar-nav">
+        <h1 class="title">@ViewBag.Title</h1>
+        <a class="pull-left" onclick="javascript: { history.back(1)}"><i class="icon icon-back"></i></a>
+        <a class="pull-right"><i class="icon"><img style="margin-top:-0.6rem;height:2.2rem;width:2.2rem;border-radius:2.2rem" src="@ViewBag.headimgurl" /></i></a>
+    </header>
+    <!--头部导航 结束-->
+    <!--主体部分 开始-->
+    <div class="content">
+        <!--banner 开始-->
+        <!--banner 结束-->
+        @*<div class="weui-cells__title">&nbsp;</div>*@
+ 
+
+
+
+        <div class="weui-panel__bd" id="listbox">
+            <a href="@Url.Action("BasicAnalysis", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/chart_3.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">基础数据</h4>
+                    <p class="weui-media-box__desc">数据分析</p>
+                </div>
+            </a>
+            <a href="@Url.Action("HeroList", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/rank_1.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">英雄榜</h4>
+                    <p class="weui-media-box__desc" style="color:red">顾问订车交车排行榜</p>
+                </div>
+            </a>
+            <a href="@Url.Action("HardWorking", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/rank_2.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">勤奋榜</h4>
+                    <p class="weui-media-box__desc">顾问营业排行榜</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Efficiency", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/rank_3.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">效率榜</h4>
+                    <p class="weui-media-box__desc">顾问订单率</p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("IntoStore", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/rank_4.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">进店榜</h4>
+                    <p class="weui-media-box__desc">期待你的精彩点评</p>
+                </div>
+            </a>
+
+            <a href="@Url.Action("MessageList", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/message.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">短信榜</h4>
+                    <p class="weui-media-box__desc">期待你的精彩点评</p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("OverView", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/chart_1.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">客户总览表</h4>
+                    <p class="weui-media-box__desc">查看意向客户订车客户保有客户等数量分布</p>
+                </div>
+
+            </a>
+
+            <a href="@Url.Action("Intention", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/chart_2.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">意向客户分析表</h4>
+                    <p class="weui-media-box__desc">查看意向客户各级别数量分布</p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("BaseFailed", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/chart_4.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">基盘留档战败表</h4>
+                    <p class="weui-media-box__desc">查看留档战败与留存意向客户数量</p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("KPI", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/test.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">顾问绩效指标</h4>
+                    <p class="weui-media-box__desc">查看留档率试驾率跟踪率进店率数据</p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("OrderAnalysis", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/line-chart.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">订单分析</h4>
+                    <p class="weui-media-box__desc"></p>
+                </div>
+
+            </a>
+            <a href="@Url.Action("SourceAnalysis", "WorkData")" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="~/Content/WeUI/images/puzzle.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">客户来源分析表</h4>
+                    <p class="weui-media-box__desc">分析新增客户来源，订单客户来源</p>
+                </div>
+
+            </a>
+
+        </div>
+
+
+
+    </div>
+    <script type="text/javascript">
+            //banner
+            $(".swiper-container").swiper({
+                loop: true,
+                autoplay: 3000
+            });
+    </script>
+    <!--底部固定导航 开始-->
+    <div class="weui-tabbar">
+        <a href="@Url.Action("Index","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-home"></i> </div>
+            <p class="weui-tabbar__label">首 页</p>
+        </a>
+        <a href="@Url.Action("Remind","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-renwuguanli"></i> </div>
+            <p class="weui-tabbar__label">提醒</p>
+        </a>
+        <a href="@Url.Action("Circle","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-process"></i> </div>
+            <p class="weui-tabbar__label">工作圈</p>
+        </a>
+        <a href="@Url.Action("WorkData","Home")" class="weui-tabbar__item  weui-bar__item--on">
+            <div class="weui-tabbar__icon"> <i class="icon icon-training"></i> </div>
+            <p class="weui-tabbar__label">数据</p>
+        </a>
+        <a href="@Url.Action("Setting","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-set"></i> </div>
+            <p class="weui-tabbar__label">设置</p>
+        </a>
+    </div>
+    <!--底部固定导航 结束-->
+</body>
+</html>
+
+
+

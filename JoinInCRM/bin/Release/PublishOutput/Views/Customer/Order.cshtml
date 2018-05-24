@@ -1,0 +1,188 @@
+﻿ 
+
+
+@using JoinInCRM.Models;
+@{
+    Order order = (Order)ViewBag.OrderList;
+    ViewBag.Title = "订单信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var orderStatus = "";
+    if (order.OrderStatus=="0")
+    {
+        // 0 then '待交车' when 1 then '已交车' when 2 then '已取消' else '未知'
+        orderStatus = "待交车";
+    }
+    else if (order.OrderStatus == "1")
+    {
+        orderStatus = "已交车";
+    }
+    else if (order.OrderStatus == "2")
+    {
+        orderStatus = "已取消";
+    }
+    else
+    {
+        orderStatus = "未知";
+    }
+
+
+}
+
+ 
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+ 
+        <a class="weui-navbar__item weui-bar__item--on  href="#tab3" " >
+            订单操作
+        </a>
+
+    </div>
+
+    <div class="weui-tab__bd">
+    
+
+        <div id="tab3" class="weui-tab__bd-item weui-tab__bd-item--active ">
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">订单编号：</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@order.OrderNo" placeholder="">
+                </div>
+            </div>
+ 
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">下订日期：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='OrderDate' name='OrderNo' value="@order.OrderDate" placeholder="">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">订单车型：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='CarName' name='CarName' value="@order.CarName" placeholder="">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">车辆颜色：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='CarColor' name='CarName' value="@order.ColorName" placeholder="">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">订单状态：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='' name='' value="@orderStatus" placeholder="">
+                </div>
+            </div>
+            @if (ViewBag.editType == "edit")
+            {
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="DealDate" class="weui-label">交车时间：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='DealDate' name='DealDate' value="@order.DealDate" placeholder="">
+
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="VINCode" class="weui-label">VIN码：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='VINCode' name='VINCode' value="@order.VINCode" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="PlateNO" class="weui-label">车牌号码：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='PlateNO' name='PlateNO' value="@order.PlateNO" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="AfterSaleMan" class="weui-label">售后顾问：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='AfterSaleMan' name='AfterSaleMan' value="@order.AfterSaleMan" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="Insure" class="weui-label">购买保险：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @if (order.Insure == "true")
+                        {
+                            <input class="weui-input" type="text" ID='Insure' name='Insure' value="是" placeholder="">
+                        }
+                        else
+                        {   
+                            <input class="weui-input" type="text" ID='Insure' name='Insure' value="否" placeholder=""> 
+                        }
+                        
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="Loan" class="weui-label">是否贷款：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @if (order.Loan == "true")
+                        {
+                            <input class="weui-input" type="text" ID='Loan' name='Loan' value="是" placeholder="">
+                        }
+                        else
+                        {
+                            <input class="weui-input" type="text" ID='Loan' name='Loan' value="否" placeholder="">
+                        }
+                         
+                    </div>
+                </div>
+ 
+
+
+            }
+            else
+            {
+                <a href="@Url.Action("OrderDeal", "Customer",new { OrderID=order.OrderID })" class="weui-btn weui-btn_blue">交车</a>
+                <a href="@Url.Action("OrderCancel", "Customer",new { OrderID=order.OrderID })" class="weui-btn weui-btn_warn">取消订单</a>
+            }
+
+
+
+            <a class="weui-btn weui-btn_default" onclick="javascript:{ history.back(1)}">返回</a>
+        </div>
+         
+
+    </div>
+
+</div>
+
+    <script src="~/Content/WeUI/js/fastclick.js"></script>
+     
+
+    <script type="text/javascript">
+        //banner
+        $(".swiper-container").swiper({
+            loop: true,
+            autoplay: 3000
+        });
+        $(function () {
+            FastClick.attach(document.body);
+            
+        });
+
+    </script>

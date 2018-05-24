@@ -1,0 +1,179 @@
+﻿
+@using JoinInCRM.Models;
+@{
+    Order order = (Order)ViewBag.OrderList;
+    ViewBag.Title = "交车";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+        <a class="weui-navbar__item weui-bar__item--on  href=" #tab3" " >
+            订单-交车
+        </a>
+    </div>
+
+    <div class="weui-tab__bd">
+
+        <form id="FormOrderDeal">
+            <div id="tab3" class="weui-tab__bd-item weui-tab__bd-item--active ">
+                <input type="text" id="OrderID" value="@order.OrderID" hidden="hidden">
+                <input type="text" id="CustomerID" value="@order.CustomerID" hidden="hidden">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">订单编号：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@order.OrderNo" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="DealDate" class="weui-label">交车时间：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='DealDate' name='DealDate' value="" placeholder="">
+
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="VINCode" class="weui-label">VIN码：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='VINCode' name='VINCode' value="" placeholder="请输入VIN码后6位">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="PlateNO" class="weui-label">车牌号码：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='PlateNO' name='PlateNO' value="" placeholder="请输入车牌号码">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="AfterSaleMan" class="weui-label">售后顾问：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='AfterSaleMan' name='AfterSaleMan' value="" placeholder="请输入售后顾问">
+                    </div>
+                </div>
+
+
+                <div class="weui-cells__title">购买保险：</div>
+                <div class="weui-cells weui-cells_radio">
+                    <label class="weui-cell weui-check__label" for="Insure1">
+                        <div class="weui-cell__bd">
+                            <p>是</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <input type="radio" class="weui-check" name="Insure" value="1" id="Insure1" checked="checked">
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="Insure2">
+
+                        <div class="weui-cell__bd">
+                            <p>否</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <input type="radio" name="Insure" class="weui-check" value="0" id="Insure2">
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+
+                </div>
+                <div class="weui-cells__title">是否贷款：</div>
+                <div class="weui-cells weui-cells_radio">
+                    <label class="weui-cell weui-check__label" for="Loan1">
+                        <div class="weui-cell__bd">
+                            <p>是</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <input type="radio" class="weui-check" name="Loan"  value="1" id="Loan1" checked="checked">
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="Loan2">
+
+                        <div class="weui-cell__bd">
+                            <p>否</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <input type="radio" name="Loan" class="weui-check"  value="0" id="Loan2">
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+
+                </div>
+
+                <a href="javascript:;" id='show-confirm' class="weui-btn weui-btn_primary">完成交车</a>
+                <a class="weui-btn weui-btn_default" onclick="javascript:{ history.back(1)}">返回</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<script src="~/Content/WeUI/js/fastclick.js"></script>
+
+
+<script type="text/javascript">
+        //banner
+        $(".swiper-container").swiper({
+            loop: true,
+            autoplay: 3000
+        });
+        $(function () {
+            FastClick.attach(document.body);
+
+        });
+        $("#DealDate").datetimePicker({
+            container: '#time-container',
+            onChange: function (picker, values, displayValues) {
+                console.log(values);
+            }
+        })
+
+        $(document).on("click", "#show-confirm", function () {
+            $.confirm("您确定要交车吗?", "确认交车?", function () {
+                var formPara = $("#FormOrderDeal").serialize();
+                $.showLoading("正在处理数据...");
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url:"@Url.Action("OrderDeal", "Customer")",
+                    data: formPara + "&CustomerID=" + document.getElementById("CustomerID").value+"&OrderID=" + document.getElementById("OrderID").value,
+                    cache:false,
+                    success: function (data) {
+
+                        $.hideLoading();
+                        var strresult = data;
+                        if (strresult == "1") {
+                            $.toast("交车成功！", function () {
+                                $.hideLoading();
+
+                            });
+                             
+                            window.location = "@Url.Action("Business", "Customer", new { ID =order.CustomerID, BusinessType ="Order" })";
+                        } else {
+                            $.toptip('操作失败', 'error');
+
+                        }
+                    },
+                    error: function (data) {
+                        $.hideLoading();
+                        $.toptip('操作失败：'+data.responseText, 'error')
+                    }
+                });
+            }, function () {
+                //取消操作
+            });
+        });
+</script>
+
+

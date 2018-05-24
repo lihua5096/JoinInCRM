@@ -1,0 +1,131 @@
+﻿ 
+@{
+    Layout = null;
+    ViewBag.Title = "设置中心";
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <title>JoinIn CRM,Join In Success!</title>
+    <meta name="keywords" content="广告关键词" />
+    <meta name="description" content="广告关键描述" />
+
+    <link href="~/Content/WeUI/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/WeUI/css/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/fonts/iconfont.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/css/foxui.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/fonts/iconfont.css" rel="stylesheet" />
+
+    <script src="~/Content/WeUI/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/WeUI/js/jquery-weui.js"></script>
+    <script src="~/Content/FoxUI/js/foxui.js"></script>
+    <script src="~/Content/WeUI/js/swiper.js"></script>
+
+
+    @*苹果专用*@
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="JoinInCRM">
+    <link rel="apple-touch-icon" href="~/Content/WeUI/images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/WeUI/images/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/WeUI/images/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/WeUI/images/touch-icon-ipad-retina.png">
+
+
+</head>
+<body ontouchstart>
+    <!--头部导航 开始-->
+    <header class="bar bar-nav">
+        <h1 class="title">@ViewBag.Title</h1>
+        <a class="pull-left" onclick="javascript: { history.back(1)}"><i class="icon icon-back"></i></a>
+        
+    </header>
+    <!--头部导航 结束-->
+    <!--主体部分 开始-->
+    <div class="content">
+        <!--banner 开始-->
+        <!--banner 结束-->
+        @*<div class="weui-cells__title">&nbsp;</div>*@
+ 
+
+        <div class="weui-panel__bd" id="listbox">
+            <a href="/news/detail_4.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+
+                    <img class="weui-media-box__thumb" src="@ViewBag.headimgurl" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">@ViewBag.nickname</h4>
+                    <p class="weui-media-box__desc">@ViewBag.country.@ViewBag.province.@ViewBag.city</p>
+                </div>
+            </a>
+            <div class="weui-cells__title">设置</div>
+            <div class="fui-cell-group fui-cell-click" style="margin-top: 4px; background-color: #ffffff;">
+                <a class="fui-cell" href="#" data-nocache="true">
+                    <div class="fui-cell-icon" style="color: #0080ff;"><i class="icon icon-my"></i></div>
+                    <div class="fui-cell-text" style="color: #333333;">我的帐户</div>
+                    <div class="fui-cell-remark" style="color: #ff0000;">查看</div>
+                </a>
+                <a class="fui-cell" href="#" data-nocache="true">
+                    <div class="fui-cell-icon" style="color: #0080ff;"><i class="icon icon-mail"></i></div>
+                    <div class="fui-cell-text" style="color: #333333;">短信模版</div>
+                    <div class="fui-cell-remark" style="color: #ff0000;">（2）</div>
+                </a>
+                <a class="fui-cell" href="" data-nocache="true">
+                    <div class="fui-cell-icon" style="color: #0080ff;"><i class="icon icon-office"></i></div>
+                    <div class="fui-cell-text" style="color: #333333;">关于我们</div>
+                    <div class="fui-cell-remark" style="color: #ff0000;">查看</div>
+                </a>
+                <a class="fui-cell" href="" data-nocache="true">
+                    <div class="fui-cell-icon" style="color: #0080ff;"><i class="icon icon-delete2"></i></div>
+                    <div class="fui-cell-text" style="color: #333333;">清除缓存</div>
+                    <div class="fui-cell-remark" style="color: #ff0000;">查看</div>
+                </a>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <script type="text/javascript">
+            //banner
+            $(".swiper-container").swiper({
+                loop: true,
+                autoplay: 3000
+            });
+    </script>
+    <!--底部固定导航 开始-->
+    <div class="weui-tabbar">
+        <a href="@Url.Action("Index","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-home"></i> </div>
+            <p class="weui-tabbar__label">首 页</p>
+        </a>
+        <a href="@Url.Action("Remind","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-renwuguanli"></i> </div>
+            <p class="weui-tabbar__label">提醒</p>
+        </a>
+        <a href="@Url.Action("Circle","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-process"></i> </div>
+            <p class="weui-tabbar__label">工作圈</p>
+        </a>
+        <a href="@Url.Action("WorkData","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-training"></i> </div>
+            <p class="weui-tabbar__label">数据</p>
+        </a>
+        <a href="@Url.Action("Setting","Home")" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon"> <i class="icon icon-set"></i> </div>
+            <p class="weui-tabbar__label">设置</p>
+        </a>
+    </div>
+    <!--底部固定导航 结束-->
+</body>
+</html>
+
+

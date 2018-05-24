@@ -1,0 +1,156 @@
+﻿
+
+
+@using JoinInCRM.Models;
+@{
+    Business busDetail = (Business)ViewBag.BusinessDetail;
+    ViewBag.Title = "营业信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+
+        <a class="weui-navbar__item weui-bar__item--on  href=" #tab3" " >
+            营业明细查看
+        </a>
+
+    </div>
+
+    <div class="weui-tab__bd">
+
+
+        <div id="tab3" class="weui-tab__bd-item weui-tab__bd-item--active ">
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">营业日期：</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='ActualDate' name='ActualDate' value="@busDetail.ActualDate" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">营业事件：</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@busDetail.BusinessEvent" placeholder="">
+                </div>
+            </div>
+            @if (busDetail.BusinessEvent== "试驾")
+            {
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">试驾车型：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@busDetail.TestCar" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">满意度：</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@busDetail.TestSatisfaction" placeholder="">
+                    </div>
+                </div>
+
+            }
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" id="BusinessDesc" name='BusinessDesc'  placeholder="" rows="3">@busDetail.BusinessDesc</textarea>
+                        
+                    </div>
+                </div>
+            </div>
+            @if (busDetail.OrderID != "0")
+            {
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">订单编号：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='OrderNo' name='OrderNo' value="@busDetail.OrderNo" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">下订日期：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='OrderDate' name='OrderNo' value="@busDetail.OrderDate" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">订单车型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='CarName' name='CarName' value="@busDetail.OrderCar" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">车辆颜色：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='CarColor' name='CarName' value="@busDetail.OrderCarColor" placeholder="">
+                    </div>
+                </div>
+            }
+            @if (busDetail.QuotedID!= "0")
+            {
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="DealDate" class="weui-label">报价日期：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='DealDate' name='DealDate' value="@busDetail.QuotedDate" placeholder="">
+
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="VINCode" class="weui-label">报价车型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='VINCode' name='VINCode' value="@busDetail.QuotedCar" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="PlateNO" class="weui-label">车型颜色：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='PlateNO' name='PlateNO' value="@busDetail.QuotedCarColor" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="AfterSaleMan" class="weui-label">报价金额：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" ID='AfterSaleMan' name='AfterSaleMan' value="@busDetail.QuotedAmount" placeholder="">
+                    </div>
+                </div>
+                 
+ 
+            }
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="AfterSaleMan" class="weui-label">客户等级：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" ID='AfterSaleMan' name='AfterSaleMan' value="@busDetail.Grade" placeholder="">
+                </div>
+            </div>
+ 
+ 
+            <a class="weui-btn weui-btn_default" onclick="javascript:{ history.back(1)}">返回</a>
+        </div>
+
+
+    </div>
+
+</div>
+ 

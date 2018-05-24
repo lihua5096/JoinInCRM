@@ -1,0 +1,48 @@
+﻿@model JoinInCRM.Models.Customer
+
+@{
+    var i = 0;
+}
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>手机</th>
+            @*<th>备注</th>*@
+            @*<th>操作</th>*@
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var item in ViewBag.CustList)
+{
+    i++;
+    var rowid = "row" + i.ToString();
+            <tr id="@rowid">
+                <td>@i</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Sex</td>
+                <td>@item.Telphone</td>
+                @*<td>@item.Remark</td>*@
+                @*<td><a class="btn-danger" onclick="DelCustomer(@item.CustomerID,@i)">删除</a></td>*@
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>
+<p>
+    ==================
+    <br />
+    搜索结果：@ViewBag.Result 
+
+</p>

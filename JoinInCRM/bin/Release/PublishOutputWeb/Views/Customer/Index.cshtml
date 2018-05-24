@@ -1,0 +1,131 @@
+﻿ 
+@{
+    ViewBag.Title = "客户资料";
+
+
+    int i = 0;
+}
+ 
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        border: none;
+        text-align: left;
+        padding: 8px;
+        font-family:inherit;
+        font-size:medium;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+</style> 
+@Styles.Render("~/Content/foxuicss")
+@Scripts.Render("~/bundles/foxui")
+@Scripts.Render("~/bundles/foxuijs")
+<div style="overflow-x:auto;">
+
+    <table cellspacing="0" >
+        <thead>
+            <tr>
+                <th>No.</th>
+                
+                <th>姓名</th>
+                <th>性别</th>
+                <th>手机</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.CustList)
+            {
+                i++;
+                var rowid = "row" + i.ToString();
+                 <tr id="@rowid">
+                     <td>@i</td>
+                     
+                     <td>@item.CustomerName</td>
+                     <td>@item.Sex</td>
+                     <td>@item.Telphone</td>
+                     <td>@item.Remark</td>
+                     <td >
+                         @*<a class="weui-icon-warn" onclick="DelCustomer(@item.CustomerID,@i)">delete</a>*@
+                         <input type="button" class="weui-btn_primary" onclick="EditCustomer(@item.CustomerID,@i)" value="编辑" />
+                         <input type="button" class="weui-btn_warn" onclick="DelCustomer(@item.CustomerID,@i)" value="删除" />
+                     </td>
+                 </tr>
+           
+            }
+             
+             
+        </tbody>
+    </table>
+</div>
+<p>
+    @ViewBag.SearchContent
+</p>  
+
+<script>
+    function DelCustomer(id, e)
+    {
+        var re = confirm("确认删除该客户吗？"
+        );
+
+        if (re) {
+
+             FoxUI.loader.show('loading');
+
+
+            $.ajax({
+                type: "get",
+       
+                url:"@Url.Action("Delete", "Customer")/"+id,
+               
+          
+                success: function (data) {
+
+                    //？？？？
+                    FoxUI.loader.hide();
+
+                    var strresult = data;
+                    if (strresult == "1") {
+                        $("#row" + e).remove(); 
+                        FoxUI.loader.show('删除完成', 'fa fa-check');
+                        setTimeout(function () {
+                            FoxUI.loader.hide();
+                        }, 1000);
+
+                    } else {
+                        FoxUI.toast.show('删除失败!')
+                    }
+
+                },
+                error: function (data) {
+                    FoxUI.loader.hide();
+                    FoxUI.toast.show('删除失败!' + data.responseText);
+
+
+                }
+
+            });
+
+
+
+
+           
+        }
+
+
+
+    }
+
+</script>
+ 

@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "我的账户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+
+<div class="weui-panel__bd" id="listbox">
+    <a href="#" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="@ViewBag.headimgurl" alt="">
+        </div>
+ 
+    </a>
+     
+    <div class="weui-cells">
+
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>昵称</p>
+            </div>
+            <div class="weui-cell__ft" id='show-nickname' style="font-size:small">@ViewBag.nickname</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>姓名</p>
+            </div>
+            <div class="weui-cell__ft" id='show-name' style="font-size:small">未填写</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>性别</p>
+            </div>
+            <div class="weui-cell_switch" id='show-sex' style="font-size:small"><input class="weui-switch" type="checkbox"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>生日</p>
+            </div>
+            <div class="weui-cell__ft"  style="font-size:small">
+                <input class="weui-input" type="date" id="show-birthday" name="PlanDate" value="">  
+            </div>
+        </a>
+
+        
+    </div>
+    <div class="weui-cells__title">&nbsp;</div>
+    <div class="weui-cells">
+         
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>手机</p>
+            </div>
+            <div class="weui-cell__ft" id='show-cellphone' style="font-size:small">未填写</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>邮箱</p>
+            </div>
+            <div class="weui-cell__ft" id='show-emailaddr' style="font-size:small">未填写</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>地区</p>
+            </div>
+            <div class="weui-cell__ft" id='show-address' style="font-size:small">
+                <input class="weui-input" id="home-city" name='address' type="text"   >
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>个性签名</p>
+            </div>
+            <div class="weui-cell__ft" id='show-signature' style="font-size:small">未填写</div>
+        </a>
+         
+    </div>
+</div>
+ 
+ <script src="~/Content/WeUI/js/fastclick.js"></script>
+<script src="~/Content/WeUI/js/city-picker.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        $("#home-city").cityPicker({
+            title: "地址",
+            showDistrict: false,
+        });
+    });
+    $(document).on("click", "#show-nickname", function() {
+        $.prompt({
+          text: "",
+          title: "输入昵称",
+          onOK: function(text) {
+            $.alert("您的名字是:"+text, ",设定成功");
+          },
+          onCancel: function() {
+            console.log("取消了");
+          },
+          input: ''
+        });
+    });
+    $(document).on("click", "#show-name", function () {
+        $.prompt({
+            text: "",
+            title: "输入姓名",
+            onOK: function (text) {
+                $.alert("您的名字是:" + text, ",设定成功");
+            },
+            onCancel: function () {
+                console.log("取消了");
+            },
+            input: ''
+        });
+    });
+ 
+
+
+
+    $(document).on("click", "#show-cellphone", function () {
+        $.prompt({
+            text: "",
+            title: "输入手机",
+            onOK: function (text) {
+                $.alert("您的手机是:" + text, ",设定成功");
+            },
+            onCancel: function () {
+                console.log("取消了");
+            },
+            input: ''
+        });
+    });
+    $(document).on("click", "#show-emailaddr", function () {
+        $.prompt({
+            text: "",
+            title: "输入邮箱",
+            onOK: function (text) {
+                $.alert("您的邮箱是:" + text, ",设定成功");
+            },
+            onCancel: function () {
+                console.log("取消了");
+            },
+            input: ''
+        });
+    });
+
+    $(document).on("click", "#show-signature", function () {
+        $.prompt({
+            text: "",
+            title: "输入个性签名",
+            onOK: function (text) {
+                $.alert("您的个性签名是:" + text, ",设定成功");
+            },
+            onCancel: function () {
+                console.log("取消了");
+            },
+            input: ''
+        });
+    });
+
+</script>

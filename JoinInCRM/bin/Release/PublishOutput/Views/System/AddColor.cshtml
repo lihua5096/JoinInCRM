@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "新增颜色";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="weui-panel__bd" id="listbox">
+    <form id="colorForm" method="post">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">颜色名称：</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="ColorName" name='ColorName' value="" placeholder="请输入颜色名称">
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">颜色类型：</label></div>
+
+            <div class="weui-cell__bd">
+                <select class="weui-select" id="ColorType" name="ColorType">
+                    @foreach (var item in ViewBag.ColorTypeList)
+                    {                        
+                        <option value="@item.ColorTypeName">@item.ColorTypeName</option>                        
+                    }
+
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">颜色示例：</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="color" id="color" value="#ffffff" name='ColorCode' onchange="changeColor()" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">颜色代码：</label></div>
+            <div class="weui-cell__bd">
+                <span id="colorInfo" name="colorInfo">#ffffff</span>
+            </div>
+        </div>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="Source" class="weui-label">是否启用：</label>
+            </div>
+            <div class="weui-cell_switch" style="font-size:small">             
+                <input class="weui-switch" id='ColorActive' name="ColorActive" type="checkbox" checked="checked">
+ 
+            </div>
+        </div>
+    </form>
+    <p class="weui-btn-area">
+        <a href="javascript:;" onclick="SaveColor()" class="weui-btn weui-btn_primary">保存</a>
+        <a onclick="javascript: { history.back(1)}" class="weui-btn weui-btn_default">返回</a>
+    </p>
+</div>
+<script type="text/javascript">
+    var color = document.getElementById("color"); 　　      　　　　　　　　//通过使用 getElementById() 来访问 <color> 元素
+    var ColorCode = document.getElementById("colorInfo");
+    ColorCode.style.color = color.value; 　　　　　　　　　　　　　　　　 //给<span>的字体加颜色
+    ColorCode.innerHTML = color.value;　　　　　　　　	　　　　　　　　	//给<span>加内容(<color>的值)
+    function changeColor() { 　　　　　　　　　　　　　　　　　　　　 //改变颜色的事件
+        ColorCode.style.color = color.value;
+        ColorCode.innerHTML = color.value;
+    }
+
+    function SaveColor() {
+         
+        var ColorName = document.getElementById("ColorName").value;
+        var ColorType = document.getElementById("ColorType").value;
+
+        if (ColorName == "") {
+            $.toptip('请输入颜色名称', 'error');
+            return;
+        }
+
+        if (ColorType == "") {
+            $.toptip('请选择颜色类型', 'error');
+            return;
+        }
+
+        var formParam = $("#colorForm").serialize();
+        $.showLoading("正在处理数据...");
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url:"@Url.Action("AddColor", "System")",
+                data: formParam,
+                cache:false,
+                success: function (data) {
+                    //？？？？
+                    $.hideLoading();
+                    var strresult = data;
+                    if (strresult == "1") {
+
+                        $.toast("保存成功！", function () {
+                            console.log('close');
+                            window.location = "@Url.Action("ColorSettings", "System")";
+                        });
+                    } else {
+                        $.toptip('操作失败:'+strresult, 'error');
+                    }
+                },
+                error: function (data) {
+                    $.hideLoading();
+                    // $.toast("保存失败"+data.responseText, "forbidden");
+                    $.toptip('操作失败：'+data.responseText, 'error')
+                }
+            });
+
+        }
+
+</script>

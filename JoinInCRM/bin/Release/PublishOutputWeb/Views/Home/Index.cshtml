@@ -1,0 +1,208 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "首页";
+
+ }
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <title>JoinIn CRM,Join in Sucess!</title>
+    <meta name="keywords" content="广告关键词" />
+    <meta name="description" content="广告关键描述" />
+
+    <link href="~/Content/WeUI/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/WeUI/css/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/FoxUI/fonts/iconfont.css" rel="stylesheet" />
+
+
+
+    <script src="~/Content/WeUI/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/WeUI/js/jquery-weui.js"></script>
+    <script src="~/Content/WeUI/js/swiper.js"></script>
+
+
+    @*苹果专用*@
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="JoinInCRM">
+    <link rel="apple-touch-icon" href="~/Content/WeUI/images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/WeUI/images/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/WeUI/images/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/WeUI/images/touch-icon-ipad-retina.png">
+
+
+</head>
+<body ontouchstart>
+    <!--头部导航 开始-->
+    <header class="bar bar-nav">
+        <h1 class="title">@ViewBag.Title</h1>
+        <a class="pull-left"><i class="icon" ><img style="margin-top:-0.6rem;height:2.2rem;width:2.2rem;border-radius:2.2rem" src="@ViewBag.headimgurl" /></i></a>
+        <a href="@Url.Action("Create","Customer")" class="pull-right"><i class="icon icon-add"></i></a>
+    </header>
+    <!--头部导航 结束-->
+    <!--主体部分 开始-->
+    <div class="content">
+
+        <div class="weui-cells__title">常用</div>
+        <div class="weui-grids whitebg" style=" margin-top:5px; padding-top:0px;">
+            <a href="@Url.Action("Index","Customer")" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/target.png" alt="意向">
+                </div>
+                <p class="weui-grid__label">意向</p>
+            </a>
+            <a href="/zhougongjiemeng/index.html" class="weui-grid js_grid" data-id="button">
+
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/contract.png" alt="已订">
+                </div>
+
+                <p class="weui-grid__label">已订</p>
+            </a>
+            <a href="/shouji/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/flag.png" alt="保有">
+                </div>
+                <p class="weui-grid__label">保有</p>
+            </a>
+            <a href="/xingming/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/sad.png" alt="战败">
+                </div>
+                <p class="weui-grid__label">战败</p>
+            </a>
+            <a href="/huangli/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/undo.png" alt="退订">
+                </div>
+                <p class="weui-grid__label">退订</p>
+            </a>
+            <a href="/qiming/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/back.png" alt="退车">
+                </div>
+                <p class="weui-grid__label">退车</p>
+            </a>
+            <a href="/qiming/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/sand-clock.png" alt="待完善">
+                </div>
+                <p class="weui-grid__label">待完善</p>
+            </a>
+            <a href="/qiming/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/virus.png" alt="未留档">
+                </div>
+                <p class="weui-grid__label">未留档</p>
+            </a>
+            <a href="/qiming/index.html" class="weui-grid js_grid" data-id="button">
+                <div class="weui-grid__icon">
+                    <img src="~/Content/WeUI/images/teamwork.png" alt="全部客户">
+                </div>
+                <p class="weui-grid__label">全部客户</p>
+            </a>
+
+        </div>
+        <!--banner 结束-->
+
+        <div class="weui-cells__title">即时</div>
+        <div class="zodiac_box whitebg">
+            <div class="swiper-wrapper ">
+                <div class="swiper-slide">
+                    <a href="/liunian/index/benyue/yue/7/shengxiao/%E9%BC%A0.html">
+                        <span>
+                            <img src="~/Content/WeUI/images/id-card.png">
+                        </span><strong>留档</strong>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/liunian/index/benyue/yue/7/shengxiao/%E7%89%9B.html">
+                        <span>
+                            <img src="~/Content/WeUI/images/open.png">
+                        </span><strong>营业</strong>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/liunian/index/benyue/yue/7/shengxiao/%E8%99%8E.html">
+                        <span>
+                            <img src="~/Content/WeUI/images/shop.png">
+                        </span><strong>进店</strong>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/liunian/index/benyue/yue/7/shengxiao/%E5%85%94.html">
+                        <span>
+                            <img src="~/Content/WeUI/images/clipboard.png">
+                        </span><strong>订单</strong>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/liunian/index/benyue/yue/7/shengxiao/%E9%BE%99.html">
+                        <span>
+                            <img src="~/Content/WeUI/images/email.png">
+                        </span><strong>消息</strong>
+                    </a>
+                </div>
+
+
+                <div class="menu_box"></div>
+            </div>
+        </div>
+        <script>
+            var swiper = new Swiper('.zodiac_box', {
+            freeMode:true,freeModeSticky:true,freeModeMomentumRatio: .5,slidesPerView : 'auto'
+            });
+        </script>
+        <div class="weui-footer">
+            <p class="weui-footer__links">
+                <a href="@Url.Action("About","Home")" class="weui-footer__link">关于我们</a>
+                <a href="javascript:void(0);" class="weui-footer__link">联系我们</a>
+                <a href="javascript:void(0);" class="weui-footer__link">商务合作</a>
+            </p>
+            <p class="weui-footer__text">Copyright © 2016-2017 JoinIn CRM</p>
+            <p> OpenID:@ViewBag.openid </p>
+            <p> Code:@ViewBag.Code</p>
+            
+        </div>
+    </div>
+    <!--主体部分 结束-->
+    <script type="text/javascript">
+      //banner
+       $(".swiper-container").swiper({
+            loop: true,
+            autoplay: 3000
+          });
+    </script>
+
+    <!--底部固定导航 开始-->
+    <div class="weui-tabbar">
+        <a href="@Url.Action("Index","Home")" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon"> <i class="icon icon-home"></i> </div>
+            <p class="weui-tabbar__label">首 页</p>
+        </a>
+        <a href="@Url.Action("Remind","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-renwuguanli"></i> </div>
+            <p class="weui-tabbar__label">提醒</p>
+        </a>
+        <a href="@Url.Action("Circle","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-process"></i> </div>
+            <p class="weui-tabbar__label">工作圈</p>
+        </a>
+        <a href="@Url.Action("WorkData","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-training"></i> </div>
+            <p class="weui-tabbar__label">数据</p>
+        </a>
+        <a href="@Url.Action("Setting","Home")" class="weui-tabbar__item ">
+            <div class="weui-tabbar__icon"> <i class="icon icon-set"></i> </div>
+            <p class="weui-tabbar__label">设置</p>
+        </a>
+    </div>
+    <!--底部固定导航 结束-->
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "HeroList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+
+<div class="weui-tab" style="z-index:10">
+    <div class="weui-navbar" style="z-index:10">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            日排行
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+            月排行
+        </a>
+
+ 
+
+    </div>
+
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="InterestedCar">
+                        <option value="-1" selected>全部</option>
+                        @foreach (var item in ViewBag.CarList)
+                        {
+                            <option value="@item.CarID">@item.CarName</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+            
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="ActualDate" class="weui-label" style="color:blueviolet">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="date" id="AnalysDate" name="AnalysDate" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+
+
+            <div style="width:100%">
+                <table border="1" cellspacing="0" style="align-content:center; border-color:#cccaca; width:100%">
+                    <thead style="background:#cccaca">
+                        <tr>
+                            <th style="width:28%">顾问</th>
+                            <th style="width:22%">订车</th>
+                            <th style="width:22%">交车</th>
+                            <th style="width:28%">已订未交</th>
+                        </tr>
+                    </thead>
+                    <tbody style="vertical-align:middle;text-align:center">
+         
+ 
+                        <tr>
+                            <td>黄伟强</td>
+                            <td>18</td>
+                            <td>5</td>
+                            <td>13</td>
+                        </tr>
+                        <tr>
+                            <td>陳健君</td>
+                            <td>18</td>
+                            <td>3</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>卢晓华</td>
+                            <td>13</td>
+                            <td>10</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>美美</td>
+                            <td>12</td>
+                            <td>10</td>
+                            <td>2</td>
+                        </tr>
+
+                        <tr>
+                            <td>小马</td>
+                            <td>12</td>
+                            <td>2</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>协联行</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>0</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div id="container"></div>
+
+        </div>
+
+        <div id="tab2" class="weui-tab__bd-item">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '英雄榜'
+            },
+ 
+            xAxis: {
+                categories: ['黄伟强', '陳健君', '卢晓华', '美美', '小马','协联行'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '订单数(笔)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' 笔'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true,
+                        allowOverlap: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: '订车',
+                data: [18, 18, 13, 12, 12,10]
+            }, {
+                name: '交车',
+                data: [5, 3, 10, 10, 2,10]
+            }, {
+                name: '已订未交',
+                data: [13,15,3,2,10,0]
+            }]
+
+        });
+    });
+
+
+</script>
+
+
+

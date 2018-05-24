@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "退订客户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string sortLetter = "";
+    var BussinessUrl = Url.Action("Business", "Customer");
+}
+
+<div class="weui-search-bar" id="searchBar">
+    <form class="weui-search-bar__form" action="@Url.Action("SearchCustomer", "Customer")">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="search" class="weui-search-bar__input" id="searchInput" name="ReturnOrderSearchContent" placeholder="输入客户姓名或手机号搜索" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>
+<div class="page-content">
+    <div class="list-block media-list contacts-list searchbar-found" style="display:block;">
+        <div class="list-group">
+            <ul>
+
+                @foreach (var item in ViewBag.CustList)
+                {
+                    if (sortLetter == "")
+                    {
+                        sortLetter = item.SortLetter;
+                        <li class="list-group-title">@sortLetter</li>
+                    }
+
+                    if (sortLetter != item.SortLetter)
+                    {
+                        sortLetter = item.SortLetter;
+                        <li class="list-group-title">@sortLetter</li>
+                    }
+
+                    <li class="contact-item">
+                        <a href="@BussinessUrl/?ID=@item.CustomerID&BusinessType=Order" class="item-link">
+                            <div class="item-content">
+                                <div class="item-media"><img style="background-color:antiquewhite" src="~/Content/WeUI/images/undo.png" width="40"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">@item.CustomerName</div>
+                                    </div>
+                                    <div class="item-subtitle">@item.Sex    @item.Telphone</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+        @if (ViewBag.Result == "")
+        {
+            <div>
+                <p style="color:crimson;font:small; font-style:italic; font-family:inherit"> 提示：没有找到相关的客户记录！</p>
+            </div>
+        }
+    </div>
+</div>
