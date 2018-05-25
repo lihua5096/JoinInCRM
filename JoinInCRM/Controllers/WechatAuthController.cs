@@ -119,13 +119,13 @@ namespace JoinInCRM.Controllers
                         //cl.Add(wui);
                     }
 
-                    dt = dbo.getsqlDatable(@"SELECT A.UserID, A.CompanyID,A.StoreID, A.LeaderUserID, A.RoleID,A.EmpNo, A.EmpName, A.CardNo, A.CellPhone, A.Sex, A.HireDate,
+                    dt = dbo.getsqlDatable(@"SELECT D.UserID, A.CompanyID,A.StoreID, A.LeaderUserID, A.RoleID,A.EmpNo, A.EmpName, A.CardNo, A.CellPhone, A.Sex, A.HireDate,
                                                      CASE WHEN A.Active = 1 THEN '在职' ELSE '离职' END AS Active,C.RoleName,B.CompanyName,E.StoreName
                                               FROM USERS A
                                               INNER JOIN [Role] C ON A.RoleID = C.RoleID
                                               INNER JOIN [Store] E ON A.StoreID=E.StoreID
                                               INNER JOIN Company B ON E.CompanyID = B.CompanyID
-                                              INNER JOIN WechatUsers D ON A.UserID = D.UserID
+                                              RIGHT JOIN WechatUsers D ON A.UserID = D.UserID
                                               Where D.OpenID =@OpenID ", new SqlParameter("OpenID", openID));
                     if (dt.Rows.Count==1)
                     {
@@ -147,6 +147,17 @@ namespace JoinInCRM.Controllers
                             CompanyName = dt.Rows[0][13].ToString(),
                             StoreName= dt.Rows[0][14].ToString()
                         };
+                        if (String.IsNullOrEmpty(dt.Rows[0][1].ToString()) || dt.Rows[0][1].ToString()=="")
+                        {
+                            if (!String.IsNullOrEmpty(dt.Rows[0][0].ToString()))
+                            {
+                                return RedirectToAction("UserBinding", "Base");
+                            }
+                            else
+                            {
+                                return Content("未知错误，请重新从公众号进入系统，如问题仍然出现，请联系系统管理员！");
+                            }
+                        }
                     }
                     else
                     {
@@ -168,6 +179,7 @@ namespace JoinInCRM.Controllers
                             CompanyName ="",
                             StoreName=""
                         };
+
                     }
                 }
 

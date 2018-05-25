@@ -388,11 +388,11 @@
     <Content Include="Views\System\EditColor.cshtml" />
     <Content Include="Views\System\AddColor.cshtml" />
     <Content Include="Views\System\BindingInfo.cshtml" />
+    <Content Include="Views\Base\UserBinding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FoxUI\images\" />
-    <Folder Include="Views\Base\" />
     <Folder Include="Views\WechatAuth\" />
   </ItemGroup>
   <ItemGroup>

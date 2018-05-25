@@ -12,22 +12,22 @@ namespace JoinInCRM.Controllers
         }
         #region 用户绑定
         // GET: System/UserBinding    
-        [HttpGet]
-        public ActionResult UserBinding()
-        {
-            if (CurrentUserInfo.CompanyID != "")
-            {
-                return View("BindingInfo");
-            }
-            else
-            {
-                DataAPI.BasicDataController apiBasecData = new DataAPI.BasicDataController();
-                ViewBag.CompanyList = apiBasecData.GetCompany();
+        //[HttpGet]
+        //public ActionResult BindingInfo()
+        //{
+        //    //if (CurrentUserInfo.CompanyID != "")
+        //    //{
+        //        return View("BindingInfo");
+        //    //}
+        //    //else
+        //    //{
+        //    //    DataAPI.BasicDataController apiBasecData = new DataAPI.BasicDataController();
+        //    //    ViewBag.CompanyList = apiBasecData.GetCompany();
 
-                return View();
-            }
+        //    //    return View();
+        //    //}
 
-        }
+        //}
         [HttpPost]
         public ActionResult UserBinding(FormCollection bindingInfo)
         {
@@ -97,9 +97,7 @@ namespace JoinInCRM.Controllers
 
         }
         #endregion
-
-
-
+ 
         // System/BindingInfo       用户绑定信息
         public ActionResult BindingInfo()
         {

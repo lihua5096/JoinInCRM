@@ -411,7 +411,7 @@ namespace JoinInCRM.DataAPI
         #endregion
         #region 客户等级
 
-        public IEnumerable< Grade> Get  Grade()
+        public IEnumerable<CustomerGrade> GetCustomerGrade()
         {
             return GetGradeList().ToArray<CustomerGrade>();
         }
