@@ -159,6 +159,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\UserBindingController.cs" />
     <Compile Include="Controllers\WechatAuthController.cs" />
     <Compile Include="Controllers\WorkDataController.cs" />
     <Compile Include="DataAPI\BasicDataController.cs" />
@@ -389,6 +390,8 @@
     <Content Include="Views\System\AddColor.cshtml" />
     <Content Include="Views\System\BindingInfo.cshtml" />
     <Content Include="Views\Base\UserBinding.cshtml" />
+    <Content Include="Views\UserBinding\UserBinding.cshtml" />
+    <Content Include="Views\UserBinding\BindingInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

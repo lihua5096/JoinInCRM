@@ -1,8 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "用户绑定";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var storeUrl = Url.RouteUrl("DefaultApi", new { httproute = "GetStore", controller = "BasicData", action = "GetStore" }) ;
+    var storeUrl = Url.RouteUrl("DefaultApi", new { httproute = "GetStore", controller = "BasicData", action = "GetStore" });
 
 }
 
@@ -32,13 +31,11 @@
             color: #999;
             text-decoration: none;
         }
-
-
 </style>
 <header class='demos-header'>
     <h1 class="demos-title">用户绑定</h1>
 </header>
- 
+
 
 <div class="weui-cells__title">方式一： 工号绑定</div>
 <div class="weui-cells weui-cells_form">
@@ -68,12 +65,12 @@
                 <input class="weui-input" type="text" id="EmpNo" name="EmpNo" placeholder="请输入员工工号">
             </div>
         </div>
- 
-     
+
+
 
     </form>
-    <a href="javascript:;" onclick="SaveBinding()"  class="weui-btn weui-btn_primary">绑定</a>
-    
+    <a href="javascript:;" onclick="SaveBinding()" class="weui-btn weui-btn_primary">绑定</a>
+
 </div>
 
 <div class="weui-cells__title">方式二： 手机号绑定</div>
@@ -134,7 +131,7 @@
     }
     function SaveBinding() {
 
-   
+
         var EmpNo = document.getElementById("EmpNo").value;
         var company = $("#CompanyID").val();
         var store = $("#StoreID").val();
@@ -147,22 +144,31 @@
         if (store == undefined ||store == "0") {
             $.toptip('请选择所在', 'error');
             return;
-        } 
+        }
         if (EmpNo == undefined || EmpNo == "") {
             $.toptip('请输入工号', 'error');
             return;
         }
+        $.showLoading("正在处理数据...");
         var formParam = $("#newcustomerForm").serialize();
         $.ajax({
-                url:"@Url.Action("UserBinding", "System")",
+                url:"@Url.Action("UserBinding", "UserBinding")",
                 type: 'POST',
                 contentType:"application/json",
                 data: formParam,
                 success: function (result) {
-                    window.location = "@Url.Action("UserBinding", "System")";
+                    $.hideLoading();
+                    if (result == "1") {
+                        $.toast("保存成功！", function () {
+                            window.location = "@Url.Action("UserBinding", "System")";
+                        });
+                    } else {
+                        $.toptip('绑定失败：'+result, 'error');
+                    }
                 },
-                error: function (data) {                     
-                    $.toptip('获取数据失败', 'error');
+                error: function (data) {
+                    $.hideLoading();
+                    $.toptip('绑定失败：' + result, 'error');
                 }
             });
     }

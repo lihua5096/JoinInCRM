@@ -151,7 +151,7 @@ namespace JoinInCRM.Controllers
                         {
                             if (!String.IsNullOrEmpty(dt.Rows[0][0].ToString()))
                             {
-                                return RedirectToAction("UserBinding", "Base");
+                                return RedirectToAction("UserBinding", "UserBinding");
                             }
                             else
                             {
