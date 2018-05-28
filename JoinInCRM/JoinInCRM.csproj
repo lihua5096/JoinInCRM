@@ -379,7 +379,6 @@
     <Content Include="Views\WorkData\OrderAnalysis.cshtml" />
     <Content Include="Views\WorkData\SourceAnalysis.cshtml" />
     <Content Include="Views\System\UserAccount.cshtml" />
-    <Content Include="Views\System\UserBinding.cshtml" />
     <Content Include="Views\System\CompanyInfo.cshtml" />
     <Content Include="Views\System\RoleSettings.cshtml" />
     <Content Include="Views\System\SourceSettings.cshtml" />
