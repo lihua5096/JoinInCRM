@@ -76,7 +76,7 @@ namespace JoinInCRM.DataAPI
             }
             return cl;
         }
-
+ 
 
         #endregion
         #region 用户信息
@@ -141,19 +141,30 @@ namespace JoinInCRM.DataAPI
             return cl;
         }
 
-        public bool CheckBindingUser(string CompanyID,string EmpNo)
+        public string CheckBindingUser(User checkUser)
         {
             SQLHelper dbo = new SQLHelper();
-            string sqlStr = "Select UserID FROM Users Where CompanyID=" + CompanyID + " And  EmpNo='"+EmpNo+"'";
-             
-            if (dbo.ReturnInteger(sqlStr, 0) == 0)
+            string sqlStr = "Select UserID FROM Users Where CompanyID=" + checkUser.CompanyID + " And  EmpNo='"+ checkUser.EmpNo + "'";
+            int re = dbo.ReturnInteger(sqlStr, 0);
+            if ( re== 0)
             {
-                return true;
+                re = dbo.ReturnInteger("Select b.CompanyID From EmpImportInfo a inner join Company b on a.[CompanyName]=b.[CompanyName]" +
+                    " inner join Store c on b.CompanyID=c.CompanyID And a.StoreName=c.StoreName ", 0);
+                if (re == 0)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "2";
+                }
             }
-            else
+            else 
             {
-                return false;
+
+                return "1";
             }
+           
 
         }
 
